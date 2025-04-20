@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuck of the Day</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin-top: 50px;
+    }
+    h1 {
+      font-size: 3em;
+      color: #cc0000;
+    }
+    #loading {
+      font-size: 1.8em;
+      margin-top: 50px;
+    }
+    #main-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    img#cuck-image {
+      max-width: 300px;
+      border: 3px solid #555;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .cuck-score-display {
+      font-size: 1.5em;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .meter-container {
+      margin: 30px auto;
+      width: 300px;
+      height: 30px;
+      background: #eee;
+      border-radius: 15px;
+      position: relative;
+      box-shadow: inset 0 0 5px #999;
+      overflow: hidden;
+    }
+    .meter-fill {
+      height: 100%;
+      border-radius: 15px;
+      background: linear-gradient(to right, #ffcc00, #ff6600, #ff3300);
+      width: 0%;
+      transition: width 1.5s ease-in-out;
+    }
+    img#chair {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cuck of the Day</h1>
+  <div id="loading">Analyzing global cuck energy...</div>
+
+  <div id="main-content">
+    <img id="cuck-image" src="" alt="Cuck of the Day">
+    <div class="meter-container">
+      <div class="meter-fill" id="meter-fill"></div>
+    </div>
+    <div id="cuck-score" class="cuck-score-display"></div>
+  </div>
+
+  <img id="chair" src="chair.PNG" alt="Cuck Chair">
+
+  <script>
+    const images = [
+      "cuck1.jpg",
+      "cuck2.jpg",
+      "cuck3.jpg",
+      "cuck4.jpg",
+      "cuck5.jpg",
+      "cuck6.jpg",
+      "cuck7.jpg",
+      "cuck8.jpg"
+    ];
+
+    const startDate = new Date('2024-01-01');
+    const today = new Date();
+    const daysSinceStart = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+
+    function seededRandom(seed) {
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    }
+
+    const randomIndex = Math.floor(seededRandom(daysSinceStart) * images.length);
+    const cuckImage = images[randomIndex];
+
+    const scoreSeed = seededRandom(daysSinceStart + 99);
+    const cuckScore = (1 + scoreSeed * 5.9).toFixed(1);
+    const fillWidth = ((cuckScore - 1) / 5.9) * 100;
+
+    setTimeout(() => {
+      document.getElementById("loading").style.display = "none";
+      const content = document.getElementById("main-content");
+      content.style.display = "block";
+      setTimeout(() => content.style.opacity = 1, 100);
+
+      document.getElementById("cuck-image").src = cuckImage;
+      document.getElementById("cuck-score").textContent = `Cuckometer™: ${cuckScore} / 6.9`;
+      document.getElementById("meter-fill").style.width = fillWidth + "%";
+    }, 2500);
+  </script>
+</body>
+</html>
